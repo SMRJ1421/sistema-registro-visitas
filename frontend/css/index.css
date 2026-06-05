@@ -1,0 +1,117 @@
+/* ==========================================================================
+   PORTAL PÚBLICO - CONFIGURACIÓN VISUAL DE 2 COLUMNAS (index.css)
+   ========================================================================== */
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar Customizada Estilo gob.pe */
+.navbar-custom {
+    background-color: #bc1624;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.brand-logo-static {
+    height: 38px;
+    margin-right: 12px;
+}
+
+.brand-text-pcm {
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.1;
+    display: inline-block;
+}
+
+.brand-subtext-pcm {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.75rem;
+    font-weight: 400;
+}
+
+.brand-divider {
+    width: 1px;
+    height: 30px;
+    background-color: rgba(255,255,255,0.3);
+    margin: 0 12px;
+    display: inline-block;
+}
+
+.sub-portal-text {
+    max-width: 600px;
+}
+
+/* Efectos y Estructuras de las Tarjetas */
+.card-portal {
+    border: none;
+    border-radius: 16px;
+    background: white;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-portal:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(188, 22, 36, 0.12);
+}
+
+/* Iconos de las secciones */
+.icon-container {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    font-size: 2.3rem;
+    transition: transform 0.3s ease;
+}
+
+.card-portal:hover .icon-container {
+    transform: scale(1.1);
+}
+
+/* Colores específicos de las dos utilidades públicas */
+.bg-portal-reportes { background-color: rgba(13, 110, 253, 0.08); color: #0d6efd; }
+.bg-portal-graficos { background-color: rgba(25, 135, 84, 0.08); color: #198754; }
+
+.btn-portal-action {
+    border-radius: 50px;
+    padding: 11px 24px;
+    font-weight: 600;
+    width: 100%;
+    transition: all 0.2s;
+}
+
+/* Botón Superior derecho de Login Funcionario */
+.btn-funcionario-login {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+}
+
+.btn-funcionario-login:hover {
+    background-color: white;
+    color: #bc1624;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Estilo Footer */
+footer {
+    background-color: #1e293b;
+    color: #94a3b8;
+    font-size: 0.8rem;
+}

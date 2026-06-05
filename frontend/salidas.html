@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RENIEC - Control de Salidas de Visitas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/salidas.css">
+    
+    <style>
+        .clickable-row {
+            cursor: pointer;
+        }
+        .clickable-row:hover {
+            background-color: rgba(220,53,69,0.08);
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+     <nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top animate__animated animate__fadeInDown">
+        <div class="container-fluid ps-0 pe-4">
+            <div class="header-brand-container d-flex align-items-center">
+                <img src="img/gob_pe_logo.png" alt="Logo gob.pe" class="brand-logo-static">
+                <div class="brand-divider"></div>
+                <span class="brand-text-pcm">
+                    Sistema de Registro de Visitas<br>
+                    <span class="brand-subtext-pcm">(Normativa PCM)</span>
+                </span>
+            </div>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-2 align-items-center">
+                    <li class="nav-item">
+                        <a class="btn-admin-panel px-3 d-flex align-items-center justify-content-center" href="admin.html" id="btnAdminPanel">
+                            <i class="fa-solid fa-lock mb-1"></i> Panel<br>Administrador
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="registro.html"><i class="fa-solid fa-user-plus mb-1"></i> Registro</a></li>
+                    <li class="nav-item"><a class="nav-link" href="salidas.html"><i class="fa-solid fa-door-open mb-1"></i> Salidas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="auditoria.html"><i class="fa-solid fa-clipboard-check mb-1"></i> Auditoría</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reportes.html"><i class="fa-solid fa-magnifying-glass mb-1"></i> Consulta</a></li>
+                    <li class="nav-item"><a class="nav-link" href="graficos.html"><i class="fa-solid fa-chart-pie mb-1"></i> Gráficos</a></li>
+                    
+                    <li class="nav-item">
+                        <button id="btnVoiceToggle" class="btn-admin-panel d-flex align-items-center justify-content-center" type="button">
+                            <i class="fa-solid fa-headphones-simple mb-1"></i> Activar<br>voz
+                        </button>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <div class="user-profile-container">
+                            <button class="user-profile-btn" id="userBtn" onclick="toggleDropdown()" type="button">
+                                <i class="fa-solid fa-user-circle" style="margin-right: 8px;"></i>
+                                <span id="navUsuarioNombre">Cargando...</span>
+                                <i class="fa-solid fa-caret-down" style="margin-left: 8px;"></i>
+                            </button>
+                            
+                            <div class="user-dropdown-menu" id="userDropdown">
+                                <a href="admin.html"><i class="fa-solid fa-tachometer-alt" style="margin-right: 8px;"></i> Panel Administrador</a>
+                                <a href="perfil.html"><i class="fa-solid fa-user-gear" style="margin-right: 8px;"></i> Ver Perfil</a>
+                                <hr class="dropdown-divider">
+                                <a href="#" onclick="cerrarSesionDelSistema(event)" class="text-danger">
+                                    <i class="fa-solid fa-right-from-bracket" style="margin-right: 8px;"></i> Cerrar Sesión
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm border-0 animate__animated animate__fadeInUp">
+                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center p-3">
+                        <h5 class="mb-0 fw-bold">
+                            <i class="fa-solid fa-person-walking-arrow-right me-2 text-warning"></i> 
+                            Personal Actualmente Dentro de la Institución
+                        </h5>
+                        <button id="btnRefrescarSalidas" class="btn btn-sm btn-outline-light">
+                            <i class="fa-solid fa-rotate me-1"></i> Actualizar Lista
+                        </button>
+                    </div>
+                    
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0 text-center">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>ID Registro</th>
+                                        <th>DNI</th>
+                                        <th>Ciudadano Visitante</th>
+                                        <th>Hora de Ingreso</th>
+                                        <th>Motivo registrado</th>
+                                        <th>Acción de Control</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaSalidasPendientes">
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="help-bot" id="helpBot">
+        <button id="helpToggle" class="help-toggle" aria-label="Ayuda rápida"><i class="fa-solid fa-comment-dots"></i></button>
+        <div id="helpPanel" class="help-panel" style="display:none;">
+            <div class="header">Ayuda rápida</div>
+            <div class="body">
+                <div class="mb-2">¿En qué necesitas ayuda? Prueba alguna de estas opciones:</div>
+                <div>
+                    <span class="help-cmd" data-cmd="salidas">Marcar salida</span>
+                    <span class="help-cmd" data-cmd="actualizar">Actualizar lista</span>
+                    <span class="help-cmd" data-cmd="voz">Activar modo voz</span>
+                    <span class="help-cmd" data-cmd="contacto">Contactar soporte</span>
+                </div>
+            </div>
+            <div class="footer text-end">
+                <button id="helpClose" class="btn btn-sm btn-outline-secondary">Cerrar</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script src="js/salidas.js"></script>
+    <script src="js/estilos.js"></script>
+</body>
+</html>
+</body>
+</html>

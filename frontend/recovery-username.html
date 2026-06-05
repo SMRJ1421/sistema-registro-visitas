@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Usuario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="css/estilos.css">
+    <style>
+        body { background:#f8f9fa; }
+        .card { max-width:720px; margin:40px auto; }
+    </style>
+</head>
+<body>
+    <div class="card shadow-sm animate__animated animate__fadeInUp">
+        <div class="card-header bg-danger text-white fw-bold">Recuperar Usuario</div>
+        <div class="card-body">
+            <p class="text-muted">Ingrese su correo electrónico y le enviaremos su nombre de usuario registrado.</p>
+            <form id="formRecoverUser">
+                <div class="mb-3">
+                    <label for="emailUser" class="form-label">Correo electrónico</label>
+                    <input type="email" id="emailUser" class="form-control" autocomplete="email" required placeholder="usuario@dominio.com">
+                </div>
+                <button type="submit" class="btn btn-danger">Enviar</button>
+                <a href="login.html" class="btn btn-link">Volver al inicio</a>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const URL_RECOVER_USER = 'http://127.0.0.1:8080/api/auth/recover-username';
+
+        $(document).ready(function(){
+            $('#formRecoverUser').on('submit', function(e){
+                e.preventDefault();
+                const email = $('#emailUser').val().trim();
+                if (!email) return;
+
+                $.ajax({
+                    url: URL_RECOVER_USER,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ email: email }),
+                    success: function(resp){
+                        // Esperamos que el backend responda con { username: '...' }
+                        if (resp && resp.username) {
+                            Swal.fire('Usuario enviado', `Se envió su usuario: <strong>${resp.username}</strong> a su correo.`, 'success');
+                        } else {
+                            Swal.fire('Enviado', 'Si la dirección existe en el sistema, recibirá un correo con su usuario.', 'info');
+                        }
+                    },
+                    error: function(){
+                        Swal.fire('Error', 'No fue posible procesar la solicitud. Contacte con soporte.', 'error');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+/* ==========================================
+   BOTONES CON EFECTO NEÓN (GLOW EFFECT)
+   ========================================== */
+
+/* --- Botón Excel (Neón Verde) --- */
+.btn-neon-excel {
+    color: #198754 !important; /* Texto verde inicial */
+    background-color: transparent !important;
+    border: 2px solid #198754 !important;
+    box-shadow: 0 0 5px rgba(25, 135, 84, 0.4);
+    transition: all 0.3s ease-in-out !important;
+    font-weight: 600;
+}
+
+.btn-neon-excel:hover {
+    color: #1a202c !important; /* Gris oscuro para mejor visualización */
+    background-color: #2ecc71 !important; /* Verde brillante neón */
+    border-color: #2ecc71 !important;
+    /* Efecto de triple sombra para máxima intensidad de brillo */
+    box-shadow: 0 0 10px #2ecc71, 
+                0 0 25px #2ecc71, 
+                0 0 40px rgba(46, 204, 113, 0.6) !important;
+}
+
+/* --- Botón PDF (Neón Rojo) --- */
+.btn-neon-pdf {
+    color: #dc3545 !important; /* Texto rojo inicial */
+    background-color: transparent !important;
+    border: 2px solid #dc3545 !important;
+    box-shadow: 0 0 5px rgba(220, 53, 69, 0.4);
+    transition: all 0.3s ease-in-out !important;
+    font-weight: 600;
+}
+
+.btn-neon-pdf:hover {
+    color: #1a202c !important; /* Gris oscuro para mejor visualización */
+    background-color: #ff4757 !important; /* Rojo brillante neón */
+    border-color: #ff4757 !important;
+    /* Efecto de triple sombra para máxima intensidad de brillo */
+    box-shadow: 0 0 10px #ff4757, 
+                0 0 25px #ff4757, 
+                0 0 40px rgba(255, 71, 87, 0.6) !important;
+}

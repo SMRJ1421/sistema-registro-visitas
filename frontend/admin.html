@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RENIEC - Panel de Administrador</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="bg-light">
+    <div id="container"></div>
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top animate__animated animate__fadeInDown">
+        <div class="container-fluid ps-0 pe-4">
+            <div class="header-brand-container d-flex align-items-center">
+                <img src="img/gob_pe_logo.png" alt="Logo gob.pe" class="brand-logo-static">
+                <div class="brand-divider"></div>
+                <span class="brand-text-pcm">
+                    Sistema de Registro de Visitas<br>
+                    <span class="brand-subtext-pcm">(Normativa PCM)</span>
+                </span>
+            </div>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-2 align-items-center">
+                    <li class="nav-item">
+                        <a class="btn-admin-panel active px-3 d-flex align-items-center justify-content-center" href="admin.html" id="btnAdminPanel">
+                            <i class="fa-solid fa-lock mb-1"></i> Panel<br>Administrador
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="registro.html"><i class="fa-solid fa-user-plus mb-1"></i> Registro</a></li>
+                    <li class="nav-item"><a class="nav-link" href="salidas.html"><i class="fa-solid fa-door-open mb-1"></i> Salidas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="auditoria.html"><i class="fa-solid fa-clipboard-check mb-1"></i> Auditoría</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reportes.html"><i class="fa-solid fa-magnifying-glass mb-1"></i> Consulta</a></li>
+                    <li class="nav-item"><a class="nav-link" href="graficos.html"><i class="fa-solid fa-chart-pie mb-1"></i> Gráficos</a></li>
+                    
+                    <li class="nav-item">
+                        <button id="btnVoiceToggle" class="btn-admin-panel d-flex align-items-center justify-content-center" type="button">
+                            <i class="fa-solid fa-headphones-simple mb-1"></i> Activar<br>voz
+                        </button>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <div class="user-profile-container">
+                            <button class="user-profile-btn" id="userBtn" onclick="toggleDropdown()" type="button">
+                                <i class="fa-solid fa-user-circle" style="margin-right: 8px;"></i>
+                                <span id="navUsuarioNombre">Cargando...</span>
+                                <i class="fa-solid fa-caret-down" style="margin-left: 8px;"></i>
+                            </button>
+                            
+                            <div class="user-dropdown-menu" id="userDropdown">
+                                <a href="admin.html"><i class="fa-solid fa-tachometer-alt" style="margin-right: 8px;"></i> Panel Administrador</a>
+                                <a href="perfil.html"><i class="fa-solid fa-user-gear" style="margin-right: 8px;"></i> Ver Perfil</a>
+                                <hr class="dropdown-divider">
+                                <a href="#" onclick="cerrarSesionDelSistema(event)" class="text-danger">
+                                    <i class="fa-solid fa-right-from-bracket" style="margin-right: 8px;"></i> Cerrar Sesión
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container pb-5" style="margin-top: 100px; position: relative; z-index: 2;">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="fw-bold">Panel de Administración</h1>
+                <p class="text-muted">Acciones rápidas para gestionar el sistema de visitas.</p>
+            </div>
+        </div>
+
+        <div class="row admin-actions g-4 justify-content-center">
+            <div class="col-md-4"><div class="card shadow-sm animate__animated animate__fadeInUp" onclick="location.href='index.html'"><div class="card-body"><h5 class="card-title"><i class="fa-solid fa-user-plus me-2 text-danger"></i>Registrar Visita</h5><p class="card-text text-muted">Acceder al formulario de registro rápido.</p></div></div></div>
+            <div class="col-md-4"><div class="card shadow-sm animate__animated animate__fadeInUp" onclick="location.href='salidas.html'"><div class="card-body"><h5 class="card-title"><i class="fa-solid fa-door-open me-2 text-warning"></i>Control de Salidas</h5><p class="card-text text-muted">Ver y registrar salidas de visitantes.</p></div></div></div>
+            <div class="col-md-4"><div class="card shadow-sm animate__animated animate__fadeInUp" onclick="location.href='reportes.html'"><div class="card-body"><h5 class="card-title"><i class="fa-solid fa-magnifying-glass me-2 text-secondary"></i>Consulta Pública</h5><p class="card-text text-muted">Buscar historial y generar reportes.</p></div></div></div>
+            <div class="col-md-4"><div class="card shadow-sm animate__animated animate__fadeInUp" onclick="location.href='graficos.html'"><div class="card-body"><h5 class="card-title"><i class="fa-solid fa-chart-pie me-2 text-success"></i>Reportes Estadísticos</h5><p class="card-text text-muted">Visualizar indicadores y flujos.</p></div></div></div>
+            <div class="col-md-4"><div class="card shadow-sm animate__animated animate__fadeInUp" onclick="location.href='auditoria.html'"><div class="card-body"><h5 class="card-title"><i class="fa-solid fa-clipboard-check me-2 text-info"></i>Log de Auditoría</h5><p class="card-text text-muted">Rastreo de cambios y seguridad.</p></div></div></div>
+        </div>
+    </div>
+
+    <div class="help-bot" id="helpBot">
+        <button id="helpToggle" class="help-toggle" aria-label="Ayuda rápida"><i class="fa-solid fa-comment-dots"></i></button>
+        <div id="helpPanel" class="help-panel" style="display:none;">
+            <div class="header">Ayuda rápida</div>
+            <div class="body">
+                <div class="mb-2">Acciones rápidas:</div>
+                <div>
+                    <span class="help-cmd" data-cmd="registro">Ir a Registro</span>
+                    <span class="help-cmd" data-cmd="salidas">Ir a Salidas</span>
+                    <span class="help-cmd" data-cmd="reportes">Ir a Reportes</span>
+                    <span class="help-cmd" data-cmd="graficos">Ir a Gráficos</span>
+                </div>
+            </div>
+            <div class="footer text-end"><button id="helpClose" class="btn btn-sm btn-outline-secondary">Cerrar</button></div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/estilos.js"></script>
+</body>
+</html>

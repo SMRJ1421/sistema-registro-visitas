@@ -1,0 +1,17 @@
+{
+  "output": {
+    "filePath": "repomix-output.xml",
+    "removeComments": true,
+    "showLineNumbers": false
+  },
+  "ignore": {
+    "customPatterns": [
+      "**/node_modules/**",
+      "**/vendor/**",
+      "**/.git/**",
+      "**/storage/**",
+      "**/bootstrap/cache/**",
+      "*.log"
+    ]
+  }
+}

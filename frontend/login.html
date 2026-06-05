@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RENIEC - Inicio de Sesión</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+
+    <div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-light">
+        
+        <div class="card card-login shadow-lg m-3 animate__animated animate__zoomIn" style="width: 100%; max-width: 420px;">
+
+            <div class="brand-header text-center text-white">
+                <h3 class="fw-bold mb-1">
+                    <i class="fa-solid fa-id-card me-2"></i>
+                    RENIEC
+                </h3>
+                <p class="small mb-0 text-white-50">
+                    Sistema de Registro de Visitas (PCM)
+                </p>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="text-center mb-4">
+                    <h5 class="fw-semibold text-dark" id="loginTitle">
+                        Control de Accesos
+                    </h5>
+                    <p class="text-muted small" id="loginSubtitle">
+                        Ingrese sus credenciales de funcionario
+                    </p>
+                </div>
+
+                <form id="formLogin">
+                    <div class="mb-3" id="grupo-usuario">
+                        <label for="username" class="form-label fw-semibold text-secondary">
+                            Usuario
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-secondary">
+                                <i class="fa-solid fa-user"></i>
+                            </span>
+                            <input type="text" class="form-control" id="username" placeholder="Ej. admin" required autocomplete="username" maxlength="50">
+                        </div>
+                    </div>
+
+                    <div class="mb-4" id="grupo-password">
+                        <label for="password" class="form-label fw-semibold text-secondary">
+                            Contraseña
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-secondary">
+                                <i class="fa-solid fa-lock"></i>
+                            </span>
+                            <input type="password" class="form-control" id="password" placeholder="••••••••" required autocomplete="current-password">
+                            <button class="btn btn-toggle-password" type="button" id="btnTogglePassword">
+                                <i class="fa-solid fa-eye" id="eyeIcon"></i>
+                            </button>
+                        </div>
+
+                        <div id="capsWarning" class="text-warning small mt-1 d-none">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            Bloq Mayús activado
+                        </div>
+
+                        <div class="text-end mt-2" id="grupo-recuperacion">
+                            <a href="recovery-password.html" class="text-danger small text-decoration-none me-3">
+                                ¿Olvidó su contraseña?
+                            </a>
+                            <a href="recovery-username.html" class="text-secondary small text-decoration-none">
+                                ¿Olvidó su usuario?
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="mb-4 d-none" id="grupo-codigo">
+                        <label for="codigo_2fa" class="form-label fw-semibold text-danger">
+                            Código de Verificación (2FA)
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-danger border-danger-subtle">
+                                <i class="fa-solid fa-key"></i>
+                            </span>
+                            <input type="text" class="form-control text-center fw-bold fs-5 border-danger-subtle" id="codigo_2fa" placeholder="000000" maxlength="6" pattern="[0-9]*" inputmode="numeric" style="letter-spacing: 6px;">
+                        </div>
+                        <div class="form-text text-muted small mt-2">
+                            Ingrese el token de 6 dígitos provisto por el sistema de seguridad.
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-reniec w-100 py-2 fw-bold shadow-sm" id="btnSubmit">
+                        <i class="fa-solid fa-right-to-bracket me-2" id="btnIcon"></i>
+                        <span id="btnText">Iniciar Sesión</span>
+                    </button>
+                </form>
+            </div>
+
+            <div class="card-footer bg-light text-center py-3 border-0 rounded-bottom">
+                <button id="btnVoiceToggle" type="button" class="btn btn-outline-secondary btn-sm voice-toggle-btn mb-2">
+                    <i class="fa-solid fa-headphones-simple me-1"></i>
+                    Activar voz
+                </button>
+                <div>
+                    <span class="text-muted small">
+                        Plataforma de Seguridad Municipal © 2026
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="help-bot" id="helpBot">
+        <button id="helpToggle" class="help-toggle" aria-label="Ayuda rápida">
+            <i class="fa-solid fa-comment-dots"></i>
+        </button>
+
+        <div id="helpPanel" class="help-panel" style="display:none;">
+            <div class="header">
+                Ayuda rápida
+            </div>
+
+            <div class="body">
+                <div class="mb-2">
+                    Opciones de recuperación:
+                </div>
+                <div>
+                    <span class="help-cmd" data-cmd="usuario">
+                        Recuperar usuario
+                    </span>
+                    <span class="help-cmd" data-cmd="contrasena">
+                        Recuperar contraseña
+                    </span>
+                    <span class="help-cmd" data-cmd="soporte">
+                        Contactar soporte
+                    </span>
+                </div>
+            </div>
+
+            <div class="footer text-end">
+                <button id="helpClose" class="btn btn-sm btn-outline-secondary">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/login.js"></script>
+</body>
+
+</html>

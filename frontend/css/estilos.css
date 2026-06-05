@@ -1,0 +1,265 @@
+/* ==========================================================================
+   RESET GLOBAL Y VARIABLES
+   ========================================================================== */
+:root {
+    --color-principal: #BF0909;
+    --color-principal-hover: #990000;
+    --color-oscuro: #1e2229;
+    --color-claro: #f4f6f9;
+    --color-borde: #e2e8f0;
+    --color-neon: #39ff14; /* Verde neón por defecto */
+    --color-neon-amarillo: #ffe600; /* Nuevo color amarillo neón */
+    --fuente-sistema: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { width: 100%; height: 100%; overflow-x: hidden; }
+
+body {
+    font-family: var(--fuente-sistema);
+    background-color: var(--color-claro);
+    color: #334155;
+    line-height: 1.6;
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    margin-top: 105px !important; 
+    padding-bottom: 40px !important;
+    display: block !important;
+    overflow-x: hidden !important;
+    overflow-y: scroll !important;
+}
+
+/* =============================================================================
+   FONDO ESTRUCTURAL: CUBOS INTERACTIVOS
+   ============================================================================= */
+#container {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -1; overflow: hidden; pointer-events: none;
+}
+
+.cube {
+    position: absolute;
+    background-color: rgba(191, 9, 9, 0.06);
+    border: 1px solid rgba(191, 9, 9, 0.12);
+    border-radius: 4px;
+    pointer-events: none;
+    will-change: transform;
+}
+
+/* =============================================================================
+   BARRA DE NAVEGACIÓN INSTITUCIONAL
+   ============================================================================= */
+.navbar {
+    position: fixed !important; top: 0 !important; left: 0; right: 0;
+    margin-top: 0 !important; border-radius: 0 !important; width: 100%;
+    background-color: var(--color-principal) !important;
+    padding-top: 12px !important; padding-bottom: 12px !important; 
+    min-height: 72px !important;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    z-index: 1050 !important; 
+    animation: none !important;
+}
+
+/* ESTRUCTURA UNIFICADA PARA TODOS LOS ELEMENTOS DEL NAV */
+.navbar-nav .nav-link, 
+.navbar-nav .btn-admin-panel, 
+.navbar-nav #btnVoiceToggle,
+.navbar-nav #authContainer a {
+    height: 60px !important; 
+    width: 110px !important; 
+    padding: 4px !important;
+    font-size: 0.72rem !important; 
+    font-weight: 600 !important;
+    border-radius: 12px !important; 
+    display: flex !important; 
+    flex-direction: column !important;
+    align-items: center !important; 
+    justify-content: center !important;
+    gap: 6px !important;
+    white-space: normal !important; 
+    text-align: center !important;
+    line-height: 1.1 !important; 
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.9) !important; 
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 0 4px !important;
+}
+
+/* MODIFICACIÓN: Ajuste para que el botón de usuario sea más cuadrado */
+.navbar-nav #authContainer a {
+    width: 90px !important; 
+    height: 70px !important;
+    font-size: 0.68rem !important;
+    word-break: break-word;
+}
+
+/* Ajuste fino para los iconos dentro del menú */
+.navbar-nav .nav-link i, 
+.navbar-nav .btn-admin-panel i, 
+.navbar-nav #btnVoiceToggle i,
+.navbar-nav #authContainer a i {
+    margin-bottom: 0 !important;
+}
+
+/* HOVER UNIFICADO PARA TODOS */
+.navbar-nav .nav-link:hover,
+.navbar-nav .btn-admin-panel:hover, 
+.navbar-nav #btnVoiceToggle:hover,
+.navbar-nav #authContainer a:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* ==========================================================================
+   EFECTOS ACTIVOS (NEÓN ESTILO FOCO) PARA LA BARRA DE NAVEGACIÓN
+   ========================================================================== */
+
+/* 1. Foco AMARILLO para los botones de navegación generales (Registro, Panel, etc.) */
+.navbar-nav .nav-link.active,
+.navbar-nav .btn-admin-panel.active {
+    background-color: var(--color-neon-amarillo) !important; /* Fondo sólido */
+    border-color: var(--color-neon-amarillo) !important;
+    color: #000000 !important; /* Letras NEGRAS para mejor contraste */
+    box-shadow: 
+        0 0 10px var(--color-neon-amarillo), 
+        0 0 20px var(--color-neon-amarillo), 
+        0 0 35px var(--color-neon-amarillo) !important; /* Brillo hacia afuera */
+    font-weight: bold !important;
+    transform: translateY(-2px);
+}
+
+/* Iconos en negro para los botones amarillos */
+.navbar-nav .nav-link.active i,
+.navbar-nav .btn-admin-panel.active i { 
+    color: #000000 !important; 
+}
+
+/* 2. Foco VERDE exclusivamente para el botón de Voz activo */
+.navbar-nav #btnVoiceToggle.active {
+    background-color: var(--color-neon) !important; /* Fondo sólido */
+    border-color: var(--color-neon) !important;
+    color: #000000 !important; /* Letras NEGRAS para mejor contraste */
+    box-shadow: 
+        0 0 10px var(--color-neon), 
+        0 0 20px var(--color-neon), 
+        0 0 35px var(--color-neon) !important; /* Brillo hacia afuera */
+    font-weight: bold !important;
+    transform: translateY(-2px);
+}
+
+/* Iconos en negro para el botón de voz */
+.navbar-nav #btnVoiceToggle.active i { 
+    color: #000000 !important; 
+}
+
+/* =============================================================================
+   COMPONENTES DEL ENCABEZADO Y RESTO DEL CSS
+   ============================================================================= */
+.header-brand-container { display: flex !important; align-items: center !important; height: 48px !important; }
+.brand-logo-static { height: 42px !important; margin-left: 20px !important; }
+.brand-divider { width: 1.5px !important; height: 38px !important; background-color: rgba(255, 255, 255, 0.35) !important; margin: 0 18px !important; }
+.brand-text-pcm { color: rgba(255, 255, 255, 0.95) !important; font-size: 0.90rem !important; font-weight: 600 !important; }
+.brand-subtext-pcm { font-size: 0.78rem !important; color: rgba(255, 255, 255, 0.75) !important; }
+
+.card { background: #ffffff; border-radius: 10px !important; border: none !important; border-top: 4px solid var(--color-principal) !important; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04) !important; margin-bottom: 1.5rem; overflow: hidden; }
+.card-header { background-color: var(--color-oscuro) !important; color: #ffffff !important; padding: 0.85rem 1.25rem !important; }
+.card-body { padding: 1.5rem !important; }
+.form-control { padding: 0.65rem 0.85rem; border: 1px solid var(--color-borde); border-radius: 6px; }
+.table th { background-color: #f8fafc !important; text-transform: uppercase; font-size: 0.82rem; padding: 1rem !important; }
+.table td { padding: 1rem !important; font-size: 0.9rem; border-bottom: 1px solid var(--color-borde); }
+
+.custom-card { transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease; }
+.custom-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0, 0, 0, 0.09) !important; }
+.spinning { animation: fa-spin 1s infinite linear; }
+@keyframes fadeInRow { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+.animated-row { animation: fadeInRow 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+
+/* ==========================================================
+   MENÚ DESPLEGABLE DEL ADMINISTRADOR (DROPDOWN)
+   ========================================================== */
+
+/* Contenedor relativo para posicionar el dropdown de forma absoluta */
+.user-profile-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Estilo del botón principal del perfil */
+.user-profile-btn {
+    background-color: #b91c1c; /* Rojo institucional */
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    transition: background 0.2s ease;
+}
+
+.user-profile-btn:hover {
+    background-color: #991b1b;
+}
+
+/* Caja contenedora del menú desplegable */
+.user-dropdown-menu {
+    display: none; /* Oculto por defecto */
+    position: absolute;
+    right: 0;
+    top: 105%;
+    background-color: #ffffff;
+    min-width: 210px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+/* Opciones del menú */
+.user-dropdown-menu a {
+    color: #374151;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.user-dropdown-menu a:hover {
+    background-color: #f3f4f6;
+    color: #111827;
+}
+
+/* Estilo especial para la opción de cerrar sesión */
+.user-dropdown-menu a.text-danger {
+    color: #dc2626;
+}
+.user-dropdown-menu a.text-danger:hover {
+    background-color: #fee2e2;
+}
+
+/* Línea divisora */
+.dropdown-divider {
+    border: 0;
+    border-top: 1px solid #e5e7eb;
+    margin: 4px 0;
+}
+
+/* Clase de activación dinámica (manejada por estilos.js) */
+.user-dropdown-menu.show {
+    display: block;
+    animation: fadeInDropdown 0.15s ease-out;
+}
+
+@keyframes fadeInDropdown {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
